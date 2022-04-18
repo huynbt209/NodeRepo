@@ -1,0 +1,41 @@
+<%- include ('../layout/admin-header') %>
+
+<form method="post" action="/admin/create-user">
+
+  <div class="mb-3">
+    <label for="username" class="form-label">UserName</label>
+    <input type="text" class="form-control" id="username" name="username">
+  </div>
+
+  <div class="mb-3">
+    <label for="email" class="form-label">Email address</label>
+    <input type="email" class="form-control" id="email" name="email">
+  </div>
+
+  <div class="mb-3">
+    <label for="full_name" class="form-label">Full Name</label>
+    <input type="text" class="form-control" id="full_name" name="full_name">
+  </div>
+
+  <div class="mb-3">
+    <label for="password" class="form-label">Password</label>
+    <input type="password" class="form-control" id="password" name="password">
+  </div>
+
+  <div class="mb-3">
+    <label for="confirmPassword" class="form-label">Confirm Password</label>
+    <input type="password" class="form-control" id="confirmPassword" name="confirmPassword">
+  </div>
+
+  <div class="mb-3">
+    <label for="time_off_total" class="form-label">Time Off Total</label>
+    <input type="number" class="form-control" id="time_off_total" name="time_off_total">
+  </div>
+
+  <div class="mb-3">
+    <label for="time_off_remain" class="form-label">Time Off Remain</label>
+    <input type="number" class="form-control" id="time_off_remain" name="time_off_remain">
+  </div>
+
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>

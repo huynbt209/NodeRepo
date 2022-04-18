@@ -1,0 +1,514 @@
+@import url("https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap");
+
+::-webkit-scrollbar-track {
+  border-radius: 10px;
+  background-color: rgb(178, 178, 178);
+}
+
+::-webkit-scrollbar {
+  width: 9px;
+  background-color: rgb(178, 178, 178);
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background-color: #80807f;
+}
+
+@keyframes face {
+  from {
+    transform: translateY(0%);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes RightToLeft {
+  from {
+    transform: translateX(-50%);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateX(0%);
+    opacity: 1;
+  }
+}
+
+@keyframes ToptoBottom {
+  from {
+    transform: translateY(-50%);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+:root {
+  --header-height: 3rem;
+  --nav-width: 60px;
+  --first-color: #4723d9;
+  --first-color-light: #afa5d9;
+  --first-color-dark: #333;
+  --white-color: #f7f6fb;
+  --body-font: "Nunito", sans-serif;
+  --normal-font-size: 1rem;
+  --z-fixed: 100;
+}
+
+*,
+::before,
+::after {
+  box-sizing: border-box;
+}
+
+body {
+  position: relative;
+  margin: var(--header-height) 0 0 0;
+  padding: 0 1rem;
+  font-family: var(--body-font);
+  font-size: var(--normal-font-size);
+  transition: 0.5s;
+}
+
+a {
+  text-decoration: none;
+}
+
+.header {
+  width: 100%;
+  height: var(--header-height);
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 1rem;
+  background-color: var(--white-color);
+  z-index: var(--z-fixed);
+  transition: 0.5s;
+}
+
+.header_toggle {
+  color: var(--first-color);
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+.header_img {
+  margin-top: 20px;
+  width: 100% !important;
+  height: 60px !important;
+  display: flex;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.header_img img {
+  border-radius: 50%;
+  width: 40px !important;
+  height: 40px;
+}
+
+.l-navbar {
+  position: fixed;
+  top: 0;
+  left: -30%;
+  width: var(--nav-width);
+  height: 100vh;
+  background-color: var(--first-color);
+  padding: 0.5rem 1rem 0 0;
+  transition: 0.5s;
+  z-index: var(--z-fixed);
+}
+
+.nav {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  overflow: hidden;
+}
+
+.nav_logo,
+.nav_link {
+  display: grid;
+  grid-template-columns: max-content max-content;
+  align-items: center;
+  column-gap: 1rem;
+  padding: 0.5rem 0 0.5rem 1.5rem;
+}
+
+.nav_logo {
+  margin-bottom: 2rem;
+}
+
+.nav_logo-icon {
+  font-size: 1.25rem;
+  color: var(--white-color);
+}
+
+.nav_logo-name {
+  color: var(--white-color);
+  font-weight: 700;
+}
+
+.nav_link {
+  position: relative;
+  color: var(--white-color);
+  margin-bottom: 1.5rem;
+  transition: 0.3s;
+}
+
+.nav_link:hover {
+  color: var(--first-color-light);
+}
+
+.nav_icon {
+  font-size: 1.25rem;
+}
+
+.display {
+  left: 500px;
+  width: 200px;
+}
+
+.body-pd {
+  padding-left: calc(var(--nav-width) + 8rem);
+}
+
+.height-100 {
+  height: 100vh;
+}
+
+@media screen and (min-width: 768px) {
+  body {
+    margin: calc(var(--header-height) + 1rem) 0 0 0;
+    padding-left: calc(var(--nav-width) + 2rem);
+  }
+
+  .header {
+    height: calc(var(--header-height) + 1rem);
+    padding: 0 2rem 0 calc(var(--nav-width) + 2rem);
+  }
+
+  .header_img {
+    width: 40px;
+    height: 40px;
+  }
+
+  .header_img img {
+    width: 45px;
+  }
+
+  .l-navbar {
+    left: 0;
+    padding: 1rem 0.8rem 0 0;
+  }
+
+  .display {
+    width: calc(var(--nav-width) + 156px);
+  }
+
+  .body-pd {
+    padding-left: calc(var(--nav-width) + 188px);
+  }
+}
+.dropdown1 {
+  min-width: 100px;
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown1:hover .drop-menu {
+  display: block;
+  position: absolute;
+  list-style: none;
+  background: #f7f6fb;
+  padding: 10px;
+  z-index: 99;
+  font-size: 16px;
+  box-shadow: 0 3px 3px rgb(49 49 49 / 20%);
+  margin-left: -20px;
+}
+
+.user-login {
+  color: var(--first-color-dark);
+}
+
+.user-drop {
+  border-bottom: 1px solid var(--first-color-dark);
+}
+.dropdown-item {
+  animation: ToptoBottom 0.3s ease-in-out;
+  margin-bottom: 3px;
+}
+
+.dropdown-item:hover {
+  background-color: var(--first-color-dark);
+  color: #eee !important;
+  border-radius: 3px;
+}
+.drop-menu {
+  width: 150px;
+  display: none;
+  animation: face 0.3s ease-in-out;
+  margin-top: -5px;
+}
+.nav-item {
+  list-style: none;
+}
+
+/* navbar-user */
+
+.navbar-brand {
+  font-size: 25px;
+  font-weight: 700;
+}
+.user-nav {
+  padding: 10px 30px !important;
+}
+.navbar-nav {
+  margin-left: 50px;
+}
+
+/* admin user-list */
+.user-list {
+  margin-top: 110px;
+  padding: 10px 50px 50px 30px;
+}
+.user-list h2 {
+  font-weight: 700;
+  padding-bottom: 30px;
+}
+.btn-view {
+  padding: 5px 10px;
+  background: var(--first-color);
+  float: right;
+}
+.create-user {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+.btn-create {
+  background: var(--first-color);
+  padding: 10px 15px 10px 30px;
+  width: 160px;
+  position: relative;
+}
+.btn-create::before {
+  position: absolute;
+  left: 20px;
+  content: "+";
+  padding-right: 10px;
+}
+.btn-create:hover::before {
+  content: "-";
+  padding-right: 10px;
+}
+.btn-userlist-close {
+  float: right;
+}
+
+/* thành */
+
+.padding {
+  padding: 3rem !important;
+}
+
+.user-card-full {
+  overflow: hidden;
+}
+
+.card {
+  border-radius: 5px;
+  -webkit-box-shadow: 0 1px 20px 0 rgba(0, 0, 0, 0.412);
+  box-shadow: 0 1px 20px 0 rgba(60, 60, 60, 0.34);
+  border: none;
+  margin-bottom: 30px;
+}
+
+.m-r-0 {
+  margin-right: 0px;
+}
+
+.m-l-0 {
+  margin-left: 0px;
+}
+
+.user-card-full .user-profile {
+  border-radius: 5px 0 0 5px;
+}
+
+.bg-c-lite-green {
+  background: -webkit-gradient(
+    linear,
+    left top,
+    right top,
+    from(#f29263),
+    to(#ee5a6f)
+  );
+  background: linear-gradient(to right, #ee5a6f, #f29263);
+}
+
+.user-profile {
+  padding: 20px 0;
+}
+
+.card-block {
+  padding: 1.25rem;
+}
+
+.m-b-25 {
+  margin-bottom: 25px;
+}
+
+.img-radius {
+  border-radius: 5px;
+}
+
+h6 {
+  font-size: 14px;
+}
+
+.card .card-block p {
+  line-height: 25px;
+}
+
+@media only screen and (min-width: 1400px) {
+  p {
+    font-size: 14px;
+  }
+}
+
+.card-block {
+  padding: 1.25rem;
+}
+
+.b-b-default {
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.m-b-20 {
+  margin-bottom: 20px;
+}
+
+.p-b-5 {
+  padding-bottom: 5px !important;
+}
+
+.card .card-block p {
+  line-height: 25px;
+}
+
+.m-b-10 {
+  margin-bottom: 10px;
+}
+
+.text-muted {
+  color: #919aa3 !important;
+}
+
+.b-b-default {
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.f-w-600 {
+  font-weight: 600;
+}
+
+.m-b-20 {
+  margin-bottom: 20px;
+}
+
+.m-t-40 {
+  margin-top: 20px;
+}
+
+.p-b-5 {
+  padding-bottom: 5px !important;
+}
+
+.m-b-10 {
+  margin-bottom: 10px;
+}
+
+.m-t-40 {
+  margin-top: 20px;
+}
+
+.user-card-full .social-link li {
+  display: inline-block;
+}
+
+.user-card-full .social-link li a {
+  font-size: 20px;
+  margin: 0 10px 0 0;
+  -webkit-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+}
+.btn-userlist-close{
+    float: right;
+}
+.btn-group{
+    display: flex;
+    float: right;
+    width: 50%;
+}
+
+.bg-gradient-primary {
+    background-color: #4e73df;
+}
+
+.bg-login-image {
+    background-image: url('https://us.123rf.com/450wm/jirsak/jirsak1706/jirsak170600022/81118090-cybersecurity-and-information-technology-security-services-concept-login-or-sign-in-internet-concept.jpg?ver=6');
+    background-position: center;
+    background-size: cover;
+}
+.time-edit{
+  display: flex;
+}
+.admin-edit{
+  width: 100%;
+  max-width: 500px;
+}
+.notification{
+  font-size: 15px;
+  font-style: italic;
+  color: green;
+  margin-left: 20px;
+}
+
+/* day-off */
+.history{
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+}
+.history-year{
+  width: 100px;
+  margin-right: 5px;
+}
+.view-year{
+  display: flex;
+}
+
+.create-request{
+  padding-top: 30px;
+  padding-right: 50px;
+}
+.create-request h2{
+  font-weight: 600;
+}
+.btn-review{
+  width: 100px;
+}

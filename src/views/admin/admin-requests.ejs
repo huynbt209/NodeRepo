@@ -1,0 +1,116 @@
+<%- include ('../layout/admin-header') %>
+
+    <div class="container">
+        <div class="user-list">
+            <div class="create-user">
+                <h2>Requests List</h2>
+            </div>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col"></th>
+                        <th scope="col">Full Name</th>
+                        <th scope="col">Request Type</th>
+                        <th scope="col">Time Off</th>
+                        <th scope="col">Content</th>
+                        <th scope="col">Quantity</th>
+                        <th scope="col">Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% for(let i=0; i < requests.length; i++) { %>
+                        <tr>
+                            <td>
+                                <%= requests[i].request_id %>
+                            </td>
+                            <td>
+                                <%= requests[i].full_name %>
+                            </td>
+                            <td>
+                                <%= requests[i].request_type %>
+                            </td>
+                            <td>
+                                <%= requests[i].time_off %>
+                            </td>
+                            <td>
+                                <%= requests[i].content %>
+                            </td>
+                            <td>
+                                <%= requests[i].quantity %>
+                            </td>
+                            <td>
+                                <%= requests[i].status %>
+                            </td>
+                            <td>
+                                <button type="button" class="btn btn-primary btn-review" data-bs-toggle="modal"
+                                    data-bs-target="#reviewRequest-<%= requests[i].request_id %>">
+                                    Review Request
+                                </button>
+                                <input name="request_id" id="request_id" type="hidden" value="<%= requests[i].request_id %>">
+                                <div class="modal fade" id="reviewRequest-<%= requests[i].request_id %>" tabindex="-1"
+                                    aria-labelledby="reviewRequestLabel" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="reviewRequestLabel">Review Request</h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                    aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <form>
+                                                    <div class="form-group">
+                                                        <label for="status" class="col-form-label">Status:</label>
+                                                        <select class="custom-select" id="status-<%= requests[i].request_id %>">
+                                                            <option selected>Select status</option>
+                                                            <option value="Approved">Approve</option>
+                                                            <option value="Decline">Decline</option>
+                                                        </select>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary"
+                                                    data-bs-dismiss="modal">Close</button>
+                                                <button type="button" id="UpdateStatusButton"
+                                                    class="btn btn-primary" onclick="change(<%= request_id = requests[i].request_id %>, full_name = '<%= requests[i].full_name %>')">Save changes</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <% } %>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script type="text/javascript">
+        function change(request_id, full_name) {
+            var status = document.getElementById(`status-${request_id}`).value;
+            if (status == "Select status") {
+                alert("Please change status");
+                return false;
+            }
+            $.ajax({
+                url: `/admin/request`,
+                type: 'put',
+                data: { request_id: request_id, status: status, full_name: full_name },
+                success: function (data, textStatus, xhr) {
+                    if (xhr.status == 200 || xhr.status == '200') {
+                        alert('Request has been reviewed!') ? "" : location.reload();
+                    } else {
+                        alert('Some error occurred try again');
+                    }
+                },
+                error: function (response) {
+                    if (response.status == 401 || response.status == '401') {
+                        location.replace("/login");
+                    }
+                    
+                }
+                    
+            });
+        }
+    </script>

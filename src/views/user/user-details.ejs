@@ -1,0 +1,36 @@
+<%- include ('../layout/user-header') %>
+
+<body>
+    <form>
+        <div class="user-list admin-edit">
+            <h2>Your Information</h2>
+            <input type="text" name="user_id" value="<%= user.user_id %>" class="inputHidden" hidden>
+            <div class="mb-3">
+                <label for="input-name" class="form-label">Full name</label>
+                <input  type="name" class="form-control" id="input-name" name="full_name"
+                    value="<%= user.full_name %>" disabled >
+            </div>
+            <div class="mb-3">
+                <label for="input-usename" class="form-label">Usename</label>
+                <input type="name" class="form-control" id="input-usename" name="username"
+                    value="<%= user.username %>" disabled>
+            </div>
+            <div class="mb-3">
+                <label for="input-email" class="form-label">Email address</label>
+                <input type="email" class="form-control" id="input-email" name="email" value="<%= user.email %>" disabled>
+            </div>
+            <div class="time-edit">
+                <div class="mb-3" style="margin-right: 30px;">
+                    <label for="input-usename" class="form-label">Time off total</label>
+                    <input type="name" class="form-control" id="input-time-total" name="time_off_total"
+                        value="<%= user.time_off_total %>" disabled>
+                </div>
+                <div class="mb-3">
+                    <label for="input-usename" class="form-label">Time off remain</label>
+                    <input type="name" class="form-control" id="input-time-remain" name="time_off_remain"
+                        value="<%= user.time_off_remain %>" disabled>
+                </div>
+            </div>
+        </div>
+    </form>
+</body>

@@ -1,0 +1,88 @@
+<%- include ('../layout/user-header') %>
+
+    <div class="container">
+        <div class="user-list">
+            <div class="history">
+                <h2>Request History</h2>
+                <div class="view-year">
+                    <input class="form-control history-year" type="number" min="1900" max="2099" step="1"
+                        value="2022" />
+                    <button class="btn btn-primary filter-year" type="button">View</button>
+                </div>
+            </div>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">Request Type</th>
+                        <th scope="col">Time off</th>
+                        <th scope="col">Quantity</th>
+                        <th scope="col">Content</th>
+                        <th scope="col">Status</th>
+                    </tr>
+                </thead>
+                <tbody class="tbody">
+                    
+                    <% for(let i=0; i < rq.length; i++) { %>
+                        <tr>
+                            <td>
+                                <%= rq[i].request_type %>
+                            </td>
+                            <td class="time-off">
+                                <%= rq[i].time_off %>
+                            </td>
+                            <td>
+                                <%= rq[i].quantity %>
+                            </td>
+                            <td>
+                                <%= rq[i].content %>
+                            </td>
+                            <td>
+                                <%= rq[i].status %>
+                            </td>
+                        </tr>
+                        <% } %>
+                    
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script type="text/javascript">
+        $('.filter-year').click(function (e) {
+            e.preventDefault();
+            var year = $('.history-year').val();
+            $.ajax({
+                url: `/user/view-history`,
+                method: 'post',
+                data: { time_off:year},
+                success: function (result, textStatus, xhr) {
+                    if (xhr.status == 200 || xhr.status == '200') {   
+                        var html= '';
+                                    for(let i=0; i < result.rq.length; i++) { 
+                                        html=html+`<tr class="txt">`
+                                            html+= `<td>`
+                                                html=html+result.rq[i].request_type;
+                                            html+=`</td>`;
+                                            html+=`<td class="time-off">`
+                                                html=html+result.rq[i].time_off;
+                                            html+=`</td>`;
+                                            html+=`<td>`
+                                                html=html+result.rq[i].quantity;
+                                            html+=`</td>`
+                                            html+=`<td>`
+                                                html=html+result.rq[i].content;
+                                            html+=`</td>`
+                                            html+=`<td>`
+                                                html=html+result.rq[i].status;
+                                            html+=`</td>`
+                                            html+=`</tr>`}
+                                    $('.tbody').html(html)    
+                            } else {
+                                alert('Some error occurred try again');
+                            }
+                }
+
+            });
+        })
+    </script>

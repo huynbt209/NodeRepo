@@ -1,0 +1,87 @@
+<%- include ('../layout/user-header') %>
+
+  <div id="error" class="text-center text-danger"></div>
+  <form class="create-request" id="input-form">
+    <h2>Create Request</h2>
+    <div class="mb-3">
+      <label for="full_name" class="form-label">Full Name</label>
+      <input type="text" class="form-control" id="full_name" name="full_name">
+    </div>
+
+    <div class="mb-3">
+      <label for="request_type" class="form-label">Type</label>
+      <input type="text" class="form-control" id="request_type" name="request_type">
+    </div>
+
+    <div class="mb-3">
+      <label for="time_off" class="form-label">Time Off</label>
+      <input type="text" class="form-control" id="time_off" name="time_off">
+    </div>
+
+    <div class="mb-3">
+      <label for="content" class="form-label">Content</label>
+      <input type="text" class="form-control" id="content" name="content">
+    </div>
+
+    <div class="mb-3">
+      <label for="quantity" class="form-label">Quantity</label>
+      <input type="number" class="form-control" id="quantity" name="quantity">
+    </div>
+
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script>
+    $(document).ready(function () {
+      $("#input-form").on("submit", function (event) {
+        event.preventDefault();
+        var full_name = $("#full_name").val();
+        var request_type = $("#request_type").val();
+        var time_off = $("#time_off").val();
+        var content = $("#content").val();
+        var quantity = $("#quantity").val();
+        var content = $("#content").val();
+        var error = $("#error");
+        error.html("");
+        if (full_name == "") {
+          error.html("Please in put your full name!");
+          return false;
+        }
+        if (request_type == "") {
+          error.html("Please in put your request type!");
+          return false;
+        }
+        if (time_off == "") {
+          error.html("Please in put your time off!");
+          return false;
+        }
+        if (quantity == "") {
+          error.html("Please in put quantity!");
+          return false;
+        }
+        if (content == "") {
+          error.html("Please in put content!");
+          return false;
+        }
+
+        $.ajax({
+          url: `/user/create-request`,
+          method: "POST",
+          data: { full_name: full_name, request_type: request_type, time_off: time_off, quantity: quantity, content: content },
+          success: function (data, textStatus, xhr) {
+            if (xhr.status == 200 || xhr.status == '200') {
+              alert('Create request successfully!')
+            } else {
+              alert('Some error occurred try again');
+            }
+          },
+          error: function (response) {
+            if (response.status == 401 || response.status == '401') {
+              location.replace("/login");
+            }
+          }
+        });
+      });
+    });
+  </script>
